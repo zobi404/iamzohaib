@@ -1,24 +1,68 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Toaster } from "sonner";
+import { Navbar } from "@/components/portfolio/Navbar";
+import { Hero } from "@/components/portfolio/Hero";
+import { About } from "@/components/portfolio/About";
+import { Clients } from "@/components/portfolio/Clients";
+import { Skills } from "@/components/portfolio/Skills";
+import { Modules } from "@/components/portfolio/Modules";
+import { Experience } from "@/components/portfolio/Experience";
+import { Projects } from "@/components/portfolio/Projects";
+import { Achievements } from "@/components/portfolio/Achievements";
+import { Contact } from "@/components/portfolio/Contact";
+import { Footer } from "@/components/portfolio/Footer";
+import { BackToTop } from "@/components/portfolio/BackToTop";
+import { CursorGlow } from "@/components/portfolio/CursorGlow";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      {
+        title:
+          "Muhammad Zohaib — Odoo Technical Consultant & Full-Stack Developer",
+      },
+      {
+        name: "description",
+        content:
+          "Muhammad Zohaib is an Odoo 17/18/19 technical consultant with 3+ years building custom modules, REST integrations, and React Native apps for enterprise clients.",
+      },
+      { name: "author", content: "Muhammad Zohaib" },
+      {
+        property: "og:title",
+        content:
+          "Muhammad Zohaib — Odoo Technical Consultant & Full-Stack Developer",
+      },
+      {
+        property: "og:description",
+        content:
+          "3+ years turning complex business needs into scalable Odoo ERP solutions — from custom modules to real-time mobile integrations.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: Portfolio,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Portfolio() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="relative min-h-screen bg-background text-foreground">
+      <CursorGlow />
+      <Navbar />
+      <main>
+        <Hero />
+        <About />
+        <Clients />
+        <Skills />
+        <Modules />
+        <Experience />
+        <Projects />
+        <Achievements />
+        <Contact />
+      </main>
+      <Footer />
+      <BackToTop />
+      <Toaster theme="dark" position="bottom-right" />
     </div>
   );
 }
