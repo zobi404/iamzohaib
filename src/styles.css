@@ -5,8 +5,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Ubuntu", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Ubuntu", "Ubuntu Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Ubuntu Mono", ui-monospace, monospace;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -34,53 +35,63 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --color-brand-blue: var(--brand-blue);
+  --color-brand-blue: var(--brand-violet);
   --color-brand-violet: var(--brand-violet);
+  --color-brand-orange: var(--brand-orange);
+  --color-brand-aubergine: var(--brand-aubergine);
   --color-surface: var(--surface);
   --color-surface-elevated: var(--surface-elevated);
 }
 
 :root {
-  --radius: 0.875rem;
+  --radius: 0.5rem; /* Ubuntu is slightly less rounded */
 
-  /* Dark-mode-first: values below apply globally */
-  --background: oklch(0.16 0.02 265);
-  --foreground: oklch(0.97 0.01 260);
+  /* Ubuntu dark aubergine base */
+  --background: oklch(0.18 0.05 350);          /* #2C001E aubergine */
+  --foreground: oklch(0.97 0.005 60);          /* warm white */
 
-  --surface: oklch(0.19 0.025 265);
-  --surface-elevated: oklch(0.22 0.03 265);
+  --surface: oklch(0.22 0.06 350);             /* #3B0A2E */
+  --surface-elevated: oklch(0.27 0.07 345);    /* #4a1638 */
 
-  --card: oklch(0.2 0.025 265);
-  --card-foreground: oklch(0.97 0.01 260);
-  --popover: oklch(0.2 0.025 265);
-  --popover-foreground: oklch(0.97 0.01 260);
+  --card: oklch(0.22 0.06 350);
+  --card-foreground: oklch(0.97 0.005 60);
+  --popover: oklch(0.22 0.06 350);
+  --popover-foreground: oklch(0.97 0.005 60);
 
-  --primary: oklch(0.65 0.2 265);
+  /* Ubuntu Orange as primary */
+  --primary: oklch(0.66 0.20 39);              /* #E95420 */
   --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.26 0.03 265);
-  --secondary-foreground: oklch(0.97 0.01 260);
 
-  --muted: oklch(0.24 0.025 265);
-  --muted-foreground: oklch(0.7 0.02 260);
+  --secondary: oklch(0.32 0.09 340);           /* mid aubergine */
+  --secondary-foreground: oklch(0.97 0.005 60);
 
-  --accent: oklch(0.6 0.22 295);
+  --muted: oklch(0.26 0.05 345);
+  --muted-foreground: oklch(0.78 0.02 55);     /* warm grey #AEA79F-ish */
+
+  /* Warm purple accent */
+  --accent: oklch(0.42 0.13 340);              /* #77216F */
   --accent-foreground: oklch(0.99 0 0);
 
-  --destructive: oklch(0.65 0.24 25);
+  --destructive: oklch(0.62 0.24 25);
   --destructive-foreground: oklch(0.99 0 0);
 
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.65 0.2 265);
+  --ring: oklch(0.66 0.20 39);
 
-  --brand-blue: #3B82F6;
-  --brand-violet: #8B5CF6;
+  /* Ubuntu brand colors */
+  --brand-orange: #E95420;
+  --brand-orange-light: #F29879;
+  --brand-aubergine: #2C001E;
+  --brand-aubergine-mid: #77216F;
+  --brand-violet: #E95420; /* alias so legacy references become orange */
+  --brand-blue: #77216F;   /* alias so legacy references become aubergine purple */
 
-  --gradient-brand: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
-  --gradient-brand-soft: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15));
-  --shadow-glow: 0 0 40px -8px rgba(99, 102, 241, 0.55);
-  --shadow-glow-sm: 0 0 22px -6px rgba(99, 102, 241, 0.45);
-  --shadow-elevated: 0 20px 60px -20px rgba(0,0,0,0.5);
+  --gradient-brand: linear-gradient(135deg, #E95420 0%, #DD4814 55%, #77216F 100%);
+  --gradient-brand-soft: linear-gradient(135deg, rgba(233,84,32,0.18), rgba(119,33,111,0.18));
+  --shadow-glow: 0 0 40px -8px rgba(233, 84, 32, 0.55);
+  --shadow-glow-sm: 0 0 22px -6px rgba(233, 84, 32, 0.45);
+  --shadow-elevated: 0 20px 60px -20px rgba(0,0,0,0.55);
 }
 
 @layer base {
@@ -103,11 +114,11 @@
 
   h1, h2, h3, h4, h5 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
   }
 
   ::selection {
-    background: rgba(139, 92, 246, 0.35);
+    background: rgba(233, 84, 32, 0.45);
     color: white;
   }
 }
@@ -123,8 +134,12 @@
   background: var(--gradient-brand);
 }
 
+@utility bg-gradient-brand-soft {
+  background: var(--gradient-brand-soft);
+}
+
 @utility glass {
-  background: rgba(15, 20, 35, 0.55);
+  background: rgba(44, 0, 30, 0.65);
   backdrop-filter: blur(16px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -134,7 +149,7 @@
   &:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-glow-sm);
-    border-color: rgba(139, 92, 246, 0.45);
+    border-color: rgba(233, 84, 32, 0.55);
   }
 }
 
@@ -189,13 +204,25 @@
   content: "|";
   margin-left: 2px;
   animation: blink 1s step-end infinite;
-  color: var(--brand-violet);
+  color: var(--brand-orange);
 }
 
 .grid-bg {
   background-image:
-    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+/* Ubuntu-style circle-of-friends accent dots (decorative) */
+.ubuntu-dots::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(233,84,32,0.12) 0 6px, transparent 7px),
+    radial-gradient(circle at 80% 20%, rgba(221,72,20,0.10) 0 5px, transparent 6px),
+    radial-gradient(circle at 60% 80%, rgba(119,33,111,0.12) 0 7px, transparent 8px);
+  pointer-events: none;
 }
