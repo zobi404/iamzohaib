@@ -47,22 +47,27 @@ export const Route = createFileRoute("/")({
 function Portfolio() {
   return (
     <div className="relative min-h-screen bg-background text-foreground">
+      {/* Fixed ambient background: dot grid + soft color orbs (GPU-cheap) */}
+      <div className="ambient-bg" aria-hidden="true" />
       <CursorGlow />
-      <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <Clients />
-        <Skills />
-        <Modules />
-        <Experience />
-        <Projects />
-        <Achievements />
-        <Contact />
-      </main>
-      <Footer />
+      <div className="relative z-10">
+        <Navbar />
+        <main>
+          <Hero />
+          <div className="section-dots"><About /></div>
+          <Clients />
+          <div className="section-grid"><Skills /></div>
+          <div className="section-dots"><Modules /></div>
+          <Experience />
+          <div className="section-grid"><Projects /></div>
+          <div className="section-dots"><Achievements /></div>
+          <Contact />
+        </main>
+        <Footer />
+      </div>
       <BackToTop />
       <Toaster theme="dark" position="bottom-right" />
     </div>
   );
 }
+
