@@ -94,6 +94,58 @@
   --shadow-elevated: 0 20px 60px -20px rgba(0,0,0,0.55);
 }
 
+/* Alternate palette: "Midnight" — darker, cooler, deep-space accents.
+   Same tokens, different values, so every component reskins automatically. */
+:root[data-theme="midnight"] {
+  --background: oklch(0.14 0.02 260);           /* near-black cool */
+  --foreground: oklch(0.97 0.005 240);
+
+  --surface: oklch(0.18 0.03 260);
+  --surface-elevated: oklch(0.22 0.035 260);
+
+  --card: oklch(0.18 0.03 260);
+  --card-foreground: oklch(0.97 0.005 240);
+  --popover: oklch(0.18 0.03 260);
+  --popover-foreground: oklch(0.97 0.005 240);
+
+  --primary: oklch(0.70 0.17 250);              /* electric indigo */
+  --primary-foreground: oklch(0.99 0 0);
+
+  --secondary: oklch(0.26 0.05 260);
+  --secondary-foreground: oklch(0.97 0.005 240);
+
+  --muted: oklch(0.22 0.03 260);
+  --muted-foreground: oklch(0.75 0.02 240);
+
+  --accent: oklch(0.55 0.18 300);               /* violet */
+  --accent-foreground: oklch(0.99 0 0);
+
+  --destructive: oklch(0.62 0.24 25);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 10%);
+  --ring: oklch(0.70 0.17 250);
+
+  --brand-orange: #7C8CFF;
+  --brand-orange-light: #A5B0FF;
+  --brand-aubergine: #0B1020;
+  --brand-aubergine-mid: #3A2A7A;
+  --brand-violet: #7C8CFF;
+  --brand-blue: #3A2A7A;
+
+  --gradient-brand: linear-gradient(135deg, #6D7BFF 0%, #8B5CF6 55%, #3A2A7A 100%);
+  --gradient-brand-soft: linear-gradient(135deg, rgba(109,123,255,0.18), rgba(139,92,246,0.18));
+  --shadow-glow: 0 0 40px -8px rgba(124, 140, 255, 0.55);
+  --shadow-glow-sm: 0 0 22px -6px rgba(124, 140, 255, 0.45);
+  --shadow-elevated: 0 20px 60px -20px rgba(0,0,0,0.7);
+}
+
+:root[data-theme="midnight"] ::selection {
+  background: rgba(124, 140, 255, 0.45);
+  color: white;
+}
+
 @layer base {
   html {
     color-scheme: dark;
