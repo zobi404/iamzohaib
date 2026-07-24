@@ -62,16 +62,21 @@ export function Navbar() {
             >
               Hire Me
             </a>
+            <div className="ml-2"><ThemeToggle /></div>
           </div>
 
-          <button
-            aria-label="Toggle menu"
-            className="md:hidden rounded-lg p-2 text-foreground/80 hover:bg-white/5"
-            onClick={() => setOpen((v) => !v)}
-          >
-            {open ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          <div className="flex items-center gap-2 md:hidden">
+            <ThemeToggle />
+            <button
+              aria-label="Toggle menu"
+              className="rounded-lg p-2 text-foreground/80 hover:bg-white/5"
+              onClick={() => setOpen((v) => !v)}
+            >
+              {open ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </nav>
+
 
         <AnimatePresence>
           {open && (
