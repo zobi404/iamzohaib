@@ -44,13 +44,13 @@ export function Hero() {
       {/* Animated background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="grid-bg absolute inset-0" />
-        <div className="absolute -left-32 top-20 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.35),transparent_65%)] animate-float-orb" />
+        <div className="absolute -left-32 top-20 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle_at_center,rgba(233,84,32,0.38),transparent_65%)] animate-float-orb" />
         <div
-          className="absolute -right-32 top-64 h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.32),transparent_65%)] animate-float-orb"
+          className="absolute -right-32 top-64 h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle_at_center,rgba(119,33,111,0.38),transparent_65%)] animate-float-orb"
           style={{ animationDelay: "-6s" }}
         />
         <div
-          className="absolute left-1/3 bottom-0 h-[360px] w-[360px] rounded-full bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.22),transparent_65%)] animate-float-orb"
+          className="absolute left-1/3 bottom-0 h-[360px] w-[360px] rounded-full bg-[radial-gradient(circle_at_center,rgba(221,72,20,0.26),transparent_65%)] animate-float-orb"
           style={{ animationDelay: "-12s" }}
         />
       </div>
