@@ -226,3 +226,90 @@
     radial-gradient(circle at 60% 80%, rgba(119,33,111,0.12) 0 7px, transparent 8px);
   pointer-events: none;
 }
+
+/* ============ Ambient page background (fixed, GPU-cheap) ============ */
+/* One fixed layer for the whole page: subtle dot grid + faint square grid,
+   masked to fade at edges. Uses background-attachment: fixed so it doesn't
+   repaint on scroll of individual sections. */
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1.4px),
+    linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+  background-size: 22px 22px, 88px 88px, 88px 88px;
+  background-position: 0 0, 0 0, 0 0;
+  mask-image: radial-gradient(ellipse at 50% 30%, black 40%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 40%, transparent 85%);
+  will-change: auto;
+}
+
+/* Two large, static color orbs behind everything for warm ambient glow.
+   Static (no animation) => zero runtime cost. */
+.ambient-bg::before,
+.ambient-bg::after {
+  content: "";
+  position: absolute;
+  width: 60vmax;
+  height: 60vmax;
+  border-radius: 9999px;
+  filter: blur(120px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+.ambient-bg::before {
+  top: -20vmax;
+  left: -15vmax;
+  background: radial-gradient(circle, rgba(233, 84, 32, 0.35), transparent 60%);
+}
+.ambient-bg::after {
+  bottom: -25vmax;
+  right: -20vmax;
+  background: radial-gradient(circle, rgba(119, 33, 111, 0.40), transparent 60%);
+}
+
+/* Per-section subtle dot pattern. Use on any <section> to add texture
+   without adding DOM nodes. Very low opacity => imperceptible cost. */
+@utility section-dots {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1.2px);
+    background-size: 20px 20px;
+    mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+    pointer-events: none;
+    z-index: 0;
+  }
+  & > * { position: relative; z-index: 1; }
+}
+
+/* Alternating section variant: faint square grid instead of dots. */
+@utility section-grid {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  & > * { position: relative; z-index: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-orb,
+  .animate-marquee { animation: none !important; }
+}
+
