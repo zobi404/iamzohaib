@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Toaster } from "sonner";
+import "@/lib/i18n";
+
 import { Navbar } from "@/components/portfolio/Navbar";
 import { Hero } from "@/components/portfolio/Hero";
 import { About } from "@/components/portfolio/About";

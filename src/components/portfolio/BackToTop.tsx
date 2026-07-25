@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowUp } from "lucide-react";
+import { useTranslation } from "react-i18next";
+
 
 export function BackToTop() {
+  const { t } = useTranslation();
   const [show, setShow] = useState(false);
   useEffect(() => {
     const onScroll = () => setShow(window.scrollY > window.innerHeight);
@@ -15,7 +18,8 @@ export function BackToTop() {
     <AnimatePresence>
       {show && (
         <motion.button
-          aria-label="Back to top"
+          aria-label={t("common.backToTop")}
+
           initial={{ opacity: 0, scale: 0.7 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.7 }}

@@ -1,59 +1,58 @@
 import { motion } from "motion/react";
 import { Briefcase } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Reveal } from "./Reveal";
 
-const items = [
-  {
-    role: "Odoo Technical Consultant",
-    company: "PRODO",
-    period: "Dec 2025 – Present",
-    bullets: [
-      "Led Fleet Management integration with Falcon-i Vehicle Tracking API for real-time tracking and trip analytics.",
-      "Built a Site Selection Recommendation System using Google Maps API + JavaScript.",
-      "Trained a YOLOv8 model for CNIC & sale-deed document detection reaching 96% accuracy.",
-      "Reduced production downtime by ~60% through targeted refactors and monitoring.",
-      "Optimized QWeb accounting reports, cutting manual reporting effort by ~35%.",
-    ],
-  },
-  {
-    role: "Software Engineering Intern",
-    company: "Pakistan State Oil",
-    period: "Jul – Sep 2024",
-    bullets: [
-      "Built a CNG Stations Locator tool identifying potential sites for PSO petrol station expansion using geographic data insights.",
-    ],
-  },
-];
-
 export function Experience() {
+  const { t } = useTranslation();
+  const items = [
+    {
+      role: t("experience.role1"),
+      company: "PRODO",
+      period: t("experience.period1"),
+      bullets: [
+        t("experience.b1_1"),
+        t("experience.b1_2"),
+        t("experience.b1_3"),
+        t("experience.b1_4"),
+        t("experience.b1_5"),
+      ],
+    },
+    {
+      role: t("experience.role2"),
+      company: "Pakistan State Oil",
+      period: t("experience.period2"),
+      bullets: [t("experience.b2_1")],
+    },
+  ];
+
   return (
     <section id="experience" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-4">
         <Reveal>
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-gradient">
-            Experience
+            {t("experience.kicker")}
           </p>
           <h2 className="font-display text-3xl font-bold sm:text-4xl md:text-5xl">
-            A short, sharp track record.
+            {t("experience.title")}
           </h2>
         </Reveal>
 
-        <div className="relative mt-14 pl-6 md:pl-10">
-          {/* Timeline line */}
+        <div className="relative mt-14 ps-6 md:ps-10">
           <motion.div
             initial={{ scaleY: 0 }}
             whileInView={{ scaleY: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 1.1, ease: [0.2, 0.8, 0.2, 1] }}
             style={{ transformOrigin: "top" }}
-            className="absolute left-1.5 top-2 h-full w-px bg-gradient-to-b from-[color:var(--brand-blue)] via-[color:var(--brand-violet)] to-transparent md:left-3"
+            className="absolute start-1.5 top-2 h-full w-px bg-gradient-to-b from-[color:var(--brand-blue)] via-[color:var(--brand-violet)] to-transparent md:start-3"
           />
 
           <div className="space-y-10">
             {items.map((it, i) => (
               <Reveal key={it.company} delay={i * 0.1}>
                 <div className="relative">
-                  <div className="absolute -left-[26px] top-3 grid h-6 w-6 place-items-center rounded-full border border-white/15 bg-background shadow-[0_0_0_4px_rgba(139,92,246,0.15)] md:-left-[34px]">
+                  <div className="absolute -start-[26px] top-3 grid h-6 w-6 place-items-center rounded-full border border-white/15 bg-background shadow-[0_0_0_4px_rgba(139,92,246,0.15)] md:-start-[34px]">
                     <div className="h-2 w-2 rounded-full bg-gradient-brand" />
                   </div>
 

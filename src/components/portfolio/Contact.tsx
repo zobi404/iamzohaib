@@ -2,38 +2,20 @@ import { useState, type FormEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Phone, Mail, Linkedin, MapPin, Send, Check } from "lucide-react";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 import { Reveal } from "./Reveal";
 
-const details = [
-  {
-    icon: Phone,
-    label: "Phone",
-    value: "+92-312-0190090",
-    href: "tel:+923120190090",
-  },
-  {
-    icon: Mail,
-    label: "Email",
-    value: "mzohaib01.inbox@gmail.com",
-    href: "mailto:mzohaib01.inbox@gmail.com",
-  },
-  {
-    icon: Linkedin,
-    label: "LinkedIn",
-    value: "muhammad-zohaib",
-    href: "https://pk.linkedin.com/in/muhammad-zohaib-5319b01b7",
-  },
-  {
-    icon: MapPin,
-    label: "Location",
-    value: "Karachi, Pakistan",
-    href: "#",
-  },
-];
-
 export function Contact() {
+  const { t } = useTranslation();
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const details = [
+    { icon: Phone, label: t("contact.phone"), value: "+92-312-0190090", href: "tel:+923120190090" },
+    { icon: Mail, label: t("contact.email"), value: "mzohaib01.inbox@gmail.com", href: "mailto:mzohaib01.inbox@gmail.com" },
+    { icon: Linkedin, label: t("contact.linkedin"), value: "muhammad-zohaib", href: "https://pk.linkedin.com/in/muhammad-zohaib-5319b01b7" },
+    { icon: MapPin, label: t("contact.location"), value: t("contact.locationValue"), href: "#" },
+  ];
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,7 +23,7 @@ export function Contact() {
     setTimeout(() => {
       setLoading(false);
       setSent(true);
-      toast.success("Message sent — I'll be in touch shortly.");
+      toast.success(t("contact.toast"));
       (e.target as HTMLFormElement).reset();
       setTimeout(() => setSent(false), 3000);
     }, 900);
@@ -52,10 +34,12 @@ export function Contact() {
       <div className="mx-auto max-w-6xl px-4">
         <Reveal>
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-gradient">
-            Contact
+            {t("contact.kicker")}
           </p>
           <h2 className="max-w-3xl font-display text-3xl font-bold leading-tight sm:text-4xl md:text-5xl lg:text-6xl">
-            Let's build your next <span className="text-gradient">ERP solution</span>.
+            {t("contact.title1")}
+            <span className="text-gradient">{t("contact.titleAccent")}</span>
+            {t("contact.title2")}
           </h2>
         </Reveal>
 
@@ -94,35 +78,35 @@ export function Contact() {
               <div className="grid gap-4">
                 <div>
                   <label className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
-                    Name
+                    {t("contact.formName")}
                   </label>
                   <input
                     required
                     type="text"
                     className="w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-foreground outline-none transition focus:border-[color:var(--brand-violet)] focus:bg-white/[0.06]"
-                    placeholder="Your name"
+                    placeholder={t("contact.phName")}
                   />
                 </div>
                 <div>
                   <label className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
-                    Email
+                    {t("contact.formEmail")}
                   </label>
                   <input
                     required
                     type="email"
                     className="w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-foreground outline-none transition focus:border-[color:var(--brand-violet)] focus:bg-white/[0.06]"
-                    placeholder="you@company.com"
+                    placeholder={t("contact.phEmail")}
                   />
                 </div>
                 <div>
                   <label className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
-                    Message
+                    {t("contact.formMessage")}
                   </label>
                   <textarea
                     required
                     rows={5}
                     className="w-full resize-none rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-foreground outline-none transition focus:border-[color:var(--brand-violet)] focus:bg-white/[0.06]"
-                    placeholder="Tell me about your project…"
+                    placeholder={t("contact.phMessage")}
                   />
                 </div>
                 <button
@@ -139,7 +123,7 @@ export function Contact() {
                         exit={{ y: -10, opacity: 0 }}
                         className="inline-flex items-center gap-2"
                       >
-                        <Check size={16} /> Sent
+                        <Check size={16} /> {t("contact.sent")}
                       </motion.span>
                     ) : (
                       <motion.span
@@ -149,7 +133,7 @@ export function Contact() {
                         exit={{ y: -10, opacity: 0 }}
                         className="inline-flex items-center gap-2"
                       >
-                        {loading ? "Sending…" : "Send Message"} <Send size={15} />
+                        {loading ? t("contact.sending") : t("contact.send")} <Send size={15} />
                       </motion.span>
                     )}
                   </AnimatePresence>

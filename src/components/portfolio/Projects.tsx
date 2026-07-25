@@ -1,5 +1,6 @@
 import { useRef, type MouseEvent } from "react";
 import { ArrowUpRight, Smartphone, Globe } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Reveal } from "./Reveal";
 
 interface Project {
@@ -11,26 +12,7 @@ interface Project {
   accent: string;
 }
 
-const projects: Project[] = [
-  {
-    title: "Allied Metro",
-    tagline: "B2B E-Commerce Platform",
-    desc: "Customer and admin React Native apps enabling bulk ordering, live inventory management, and multilingual support for a UK-based wholesale client — fully integrated with Odoo ERP.",
-    stack: ["React Native", "Redux", "Odoo REST API", "Multilingual"],
-    device: "phone",
-    accent: "from-blue-500/30 to-violet-500/30",
-  },
-  {
-    title: "MedRep",
-    tagline: "Medical Sales Rep Assistant",
-    desc: "Cross-platform, offline-first app helping medical reps plan visits, log interactions, and manage inventory in real time — reliable in the field with intermittent connectivity.",
-    stack: ["React Native", "SQLite", "Offline-first"],
-    device: "phone",
-    accent: "from-violet-500/30 to-fuchsia-500/30",
-  },
-];
-
-function TiltCard({ p }: { p: Project }) {
+function TiltCard({ p, viewLabel }: { p: Project; viewLabel: string }) {
   const ref = useRef<HTMLDivElement>(null);
 
   const onMove = (e: MouseEvent<HTMLDivElement>) => {
@@ -61,7 +43,6 @@ function TiltCard({ p }: { p: Project }) {
         className={`absolute inset-0 -z-10 rounded-3xl bg-gradient-to-br ${p.accent} opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100`}
       />
 
-      {/* Device mock */}
       <div className="relative mb-6 grid place-items-center overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.04] to-transparent p-6 sm:p-10">
         {p.device === "phone" ? (
           <div className="relative h-56 w-32 rounded-[26px] border border-white/15 bg-gradient-to-br from-slate-800 to-slate-900 p-1.5 shadow-2xl sm:h-72 sm:w-40">
@@ -102,29 +83,49 @@ function TiltCard({ p }: { p: Project }) {
       </div>
 
       <button className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-gradient hover:gap-2.5 transition-all">
-        View Case Study <ArrowUpRight size={16} />
+        {viewLabel} <ArrowUpRight size={16} />
       </button>
     </div>
   );
 }
 
 export function Projects() {
+  const { t } = useTranslation();
+  const projects: Project[] = [
+    {
+      title: "Allied Metro",
+      tagline: t("projects.allied_tagline"),
+      desc: t("projects.allied_desc"),
+      stack: ["React Native", "Redux", "Odoo REST API", "Multilingual"],
+      device: "phone",
+      accent: "from-blue-500/30 to-violet-500/30",
+    },
+    {
+      title: "MedRep",
+      tagline: t("projects.medrep_tagline"),
+      desc: t("projects.medrep_desc"),
+      stack: ["React Native", "SQLite", "Offline-first"],
+      device: "phone",
+      accent: "from-violet-500/30 to-fuchsia-500/30",
+    },
+  ];
+
   return (
     <section id="projects" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-4">
         <Reveal>
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-gradient">
-            Featured Projects
+            {t("projects.kicker")}
           </p>
           <h2 className="font-display text-3xl font-bold sm:text-4xl md:text-5xl">
-            Selected work.
+            {t("projects.title")}
           </h2>
         </Reveal>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {projects.map((p, i) => (
             <Reveal key={p.title} delay={i * 0.1}>
-              <TiltCard p={p} />
+              <TiltCard p={p} viewLabel={t("projects.viewCase")} />
             </Reveal>
           ))}
         </div>
