@@ -24,8 +24,12 @@ export function Contact() {
       setLoading(false);
       setSent(true);
       toast.success(t("contact.toast"));
-      (e.target as HTMLFormElement).reset();
-      setTimeout(() => setSent(false), 3000);
+      // submit the form to FormSubmit (action attribute on the form)
+      try {
+        (e.target as HTMLFormElement).submit();
+      } catch (err) {
+        // if native submit fails, do nothing — user will see toast
+      }
     }, 900);
   };
 
@@ -72,15 +76,21 @@ export function Contact() {
 
           <Reveal delay={0.15}>
             <form
+              action="https://formsubmit.co/f5cd973dba1ae71e2dfaebfa0a7fa412"
+              method="POST"
               onSubmit={onSubmit}
               className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8"
             >
+              {/* FormSubmit hidden fields */}
+              <input type="hidden" name="_subject" value="New message from portfolio" />
+              <input type="hidden" name="_captcha" value="false" />
               <div className="grid gap-4">
                 <div>
                   <label className="mb-1.5 block text-xs uppercase tracking-widest text-muted-foreground">
                     {t("contact.formName")}
                   </label>
                   <input
+                    name="name"
                     required
                     type="text"
                     className="w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-foreground outline-none transition focus:border-[color:var(--brand-violet)] focus:bg-white/[0.06]"
@@ -92,6 +102,7 @@ export function Contact() {
                     {t("contact.formEmail")}
                   </label>
                   <input
+                    name="email"
                     required
                     type="email"
                     className="w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-foreground outline-none transition focus:border-[color:var(--brand-violet)] focus:bg-white/[0.06]"
@@ -103,6 +114,7 @@ export function Contact() {
                     {t("contact.formMessage")}
                   </label>
                   <textarea
+                    name="message"
                     required
                     rows={5}
                     className="w-full resize-none rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-foreground outline-none transition focus:border-[color:var(--brand-violet)] focus:bg-white/[0.06]"
