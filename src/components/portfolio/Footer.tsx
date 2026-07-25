@@ -1,12 +1,13 @@
 import { Linkedin, Mail, Phone } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export function Footer() {
+  const { t } = useTranslation();
   return (
     <footer className="border-t border-white/10 py-10">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 sm:flex-row">
         <p className="text-sm text-muted-foreground">
-          © {new Date().getFullYear()} Muhammad Zohaib — Built with passion for Odoo &
-          clean code.
+          © {new Date().getFullYear()} Muhammad Zohaib — {t("footer.rights")}
         </p>
         <div className="flex items-center gap-2">
           <a

@@ -1,16 +1,17 @@
+import { useTranslation } from "react-i18next";
 import { Reveal } from "./Reveal";
 
-// Replace with actual client logo files (SVG/PNG) in /public/logos/
 const clients = ["Biafo Public Limited", "Ismail Global", "Al Babtain Foods", "Allied Metro (UK)"];
 
 export function Clients() {
+  const { t } = useTranslation();
   const loop = [...clients, ...clients, ...clients];
   return (
     <section className="relative py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-4">
         <Reveal>
           <h2 className="text-center font-display text-2xl font-bold sm:text-3xl">
-            Trusted By Leading Businesses
+            {t("clients.title")}
           </h2>
         </Reveal>
 
@@ -33,8 +34,7 @@ export function Clients() {
 
         <Reveal delay={0.15}>
           <p className="mt-8 text-center text-sm text-muted-foreground">
-            Delivering enterprise ERP solutions across retail, manufacturing, food, and
-            e-commerce industries.
+            {t("clients.footer")}
           </p>
         </Reveal>
       </div>

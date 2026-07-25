@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowUp } from "lucide-react";
+import { useTranslation } from "react-i18next";
+
 
 export function BackToTop() {
   const [show, setShow] = useState(false);

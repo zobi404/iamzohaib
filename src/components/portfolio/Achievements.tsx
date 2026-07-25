@@ -1,37 +1,24 @@
 import { Trophy, GraduationCap, Award } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Reveal } from "./Reveal";
 
-const items = [
-  {
-    icon: Trophy,
-    title: "Top Scorer",
-    detail: "CosmiCode Coding Competition, Karachi",
-    date: "June 2024",
-  },
-  {
-    icon: Award,
-    title: "Runner-Up",
-    detail: "University Elections, SMIU",
-    date: "March 2024",
-  },
-  {
-    icon: GraduationCap,
-    title: "BS Software Engineering",
-    detail: "Sindh Madressatul Islam University",
-    date: "2022 – 2026",
-  },
-];
-
 export function Achievements() {
+  const { t } = useTranslation();
+  const items = [
+    { icon: Trophy, title: t("achievements.top_title"), detail: t("achievements.top_detail"), date: t("achievements.top_date") },
+    { icon: Award, title: t("achievements.runner_title"), detail: t("achievements.runner_detail"), date: t("achievements.runner_date") },
+    { icon: GraduationCap, title: t("achievements.bs_title"), detail: t("achievements.bs_detail"), date: t("achievements.bs_date") },
+  ];
+
   return (
     <section className="relative py-20 sm:py-24">
       <div className="mx-auto max-w-6xl px-4">
         <Reveal>
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-gradient">
-            Achievements
+            {t("achievements.kicker")}
           </p>
           <h2 className="font-display text-3xl font-bold sm:text-4xl">
-            Recognition & education.
+            {t("achievements.title")}
           </h2>
         </Reveal>
 

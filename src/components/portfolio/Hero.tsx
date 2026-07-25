@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { ArrowRight, Mail, ChevronDown } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
-const roles = [
-  "Odoo Technical Consultant",
-  "ERP Solutions Architect",
-  "Mobile & API Integration Specialist",
-];
-
-function useTypedText() {
+function useTypedText(roles: string[]) {
   const [i, setI] = useState(0);
   const [text, setText] = useState("");
   const [del, setDel] = useState(false);
 
+  // Reset when roles change (language switch)
   useEffect(() => {
-    const current = roles[i];
+    setI(0);
+    setText("");
+    setDel(false);
+  }, [roles.join("|")]);
+
+  useEffect(() => {
+    if (roles.length === 0) return;
+    const current = roles[i % roles.length];
     const speed = del ? 40 : 80;
     const t = setTimeout(() => {
       if (!del) {
@@ -31,17 +34,18 @@ function useTypedText() {
       }
     }, speed);
     return () => clearTimeout(t);
-  }, [text, del, i]);
+  }, [text, del, i, roles]);
 
   return text;
 }
 
 export function Hero() {
-  const typed = useTypedText();
+  const { t } = useTranslation();
+  const roles = [t("hero.role1"), t("hero.role2"), t("hero.role3")];
+  const typed = useTypedText(roles);
 
   return (
     <section id="top" className="relative flex min-h-[100svh] items-center overflow-hidden pt-24">
-      {/* Animated background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="grid-bg absolute inset-0" />
         <div className="absolute -left-32 top-20 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle_at_center,rgba(233,84,32,0.38),transparent_65%)] animate-float-orb" />
@@ -64,7 +68,7 @@ export function Hero() {
         >
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs text-muted-foreground">
             <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.9)]" />
-            Available for consulting engagements
+            {t("hero.available")}
           </div>
 
           <h1 className="font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
@@ -76,8 +80,7 @@ export function Hero() {
           </div>
 
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            3+ years turning complex business needs into scalable Odoo ERP solutions — from
-            custom modules to real-time mobile integrations.
+            {t("hero.subtitle")}
           </p>
 
           <div className="mt-9 flex flex-wrap gap-3">
@@ -85,13 +88,13 @@ export function Hero() {
               href="#projects"
               className="btn-glow inline-flex items-center gap-2 rounded-xl bg-gradient-brand px-6 py-3.5 text-sm font-semibold text-white"
             >
-              View My Work <ArrowRight size={16} />
+              {t("hero.viewWork")} <ArrowRight size={16} />
             </a>
             <a
               href="#contact"
               className="btn-glow inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-6 py-3.5 text-sm font-semibold text-foreground hover:border-white/25"
             >
-              <Mail size={16} /> Let's Talk
+              <Mail size={16} /> {t("hero.letsTalk")}
             </a>
           </div>
         </motion.div>
@@ -99,7 +102,7 @@ export function Hero() {
 
       <motion.a
         href="#about"
-        aria-label="Scroll down"
+        aria-label={t("hero.scroll")}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}

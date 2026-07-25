@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "motion/react";
+import { useTranslation } from "react-i18next";
 import { Reveal } from "./Reveal";
 import headshot from "@/assets/zohaib-headshot.jpg";
 
@@ -31,13 +32,14 @@ function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
   );
 }
 
-const stats = [
-  { value: 3, suffix: "+", label: "Years Experience" },
-  { value: 7, suffix: "+", label: "Business Domains Delivered" },
-  { value: 60, suffix: "%", label: "Downtime Reduction Achieved" },
-];
-
 export function About() {
+  const { t } = useTranslation();
+  const stats = [
+    { value: 3, suffix: "+", label: t("about.stat1") },
+    { value: 7, suffix: "+", label: t("about.stat2") },
+    { value: 60, suffix: "%", label: t("about.stat3") },
+  ];
+
   return (
     <section id="about" className="relative py-24 sm:py-32">
       <div className="mx-auto grid max-w-6xl gap-14 px-4 md:grid-cols-[280px_1fr] md:items-center lg:gap-20">
@@ -47,7 +49,7 @@ export function About() {
             <div className="relative h-full w-full rounded-full p-[3px] bg-gradient-brand">
               <img
                 src={headshot}
-                alt="Portrait of Muhammad Zohaib"
+                alt={t("about.portrait")}
                 className="h-full w-full rounded-full object-cover"
                 loading="lazy"
               />
@@ -58,18 +60,15 @@ export function About() {
         <div>
           <Reveal>
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-gradient">
-              About
+              {t("about.kicker")}
             </p>
             <h2 className="font-display text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
-              Building enterprise ERP that actually ships.
+              {t("about.title")}
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-6 text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Results-driven Odoo Developer with hands-on experience in Odoo 18 & 19,
-              specializing in custom module development, third-party API integrations, and
-              ERP-to-mobile connectivity. Delivered production-grade solutions across
-              Accounting, HR, Payroll, POS, Fleet, Sales, and Purchase modules.
+              {t("about.body")}
             </p>
           </Reveal>
 

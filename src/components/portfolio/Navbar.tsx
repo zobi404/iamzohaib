@@ -1,22 +1,24 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { ThemeToggle } from "./ThemeToggle";
-
-
-const links = [
-  { href: "#about", label: "About" },
-  { href: "#skills", label: "Skills" },
-  { href: "#modules", label: "Odoo" },
-  { href: "#experience", label: "Experience" },
-  { href: "#projects", label: "Projects" },
-  { href: "#case-studies", label: "Case Studies" },
-  { href: "#contact", label: "Contact" },
-];
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 export function Navbar() {
+  const { t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
+  const links = [
+    { href: "#about", label: t("nav.about") },
+    { href: "#skills", label: t("nav.skills") },
+    { href: "#modules", label: t("nav.odoo") },
+    { href: "#experience", label: t("nav.experience") },
+    { href: "#projects", label: t("nav.projects") },
+    { href: "#case-studies", label: t("nav.caseStudies") },
+    { href: "#contact", label: t("nav.contact") },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -61,15 +63,17 @@ export function Navbar() {
               href="#contact"
               className="btn-glow ml-2 rounded-lg bg-gradient-brand px-4 py-2 text-sm font-semibold text-white"
             >
-              Hire Me
+              {t("nav.hireMe")}
             </a>
-            <div className="ml-2"><ThemeToggle /></div>
+            <div className="ml-2"><LanguageSwitcher /></div>
+            <div className="ml-1"><ThemeToggle /></div>
           </div>
 
           <div className="flex items-center gap-2 md:hidden">
+            <LanguageSwitcher />
             <ThemeToggle />
             <button
-              aria-label="Toggle menu"
+              aria-label={t("nav.toggleMenu")}
               className="rounded-lg p-2 text-foreground/80 hover:bg-white/5"
               onClick={() => setOpen((v) => !v)}
             >
@@ -77,7 +81,6 @@ export function Navbar() {
             </button>
           </div>
         </nav>
-
 
         <AnimatePresence>
           {open && (
