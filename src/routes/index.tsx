@@ -8,6 +8,7 @@ import { Skills } from "@/components/portfolio/Skills";
 import { Modules } from "@/components/portfolio/Modules";
 import { Experience } from "@/components/portfolio/Experience";
 import { Projects } from "@/components/portfolio/Projects";
+import { CaseStudies } from "@/components/portfolio/CaseStudies";
 import { Achievements } from "@/components/portfolio/Achievements";
 import { Contact } from "@/components/portfolio/Contact";
 import { Footer } from "@/components/portfolio/Footer";
@@ -60,6 +61,7 @@ function Portfolio() {
           <div className="section-dots"><Modules /></div>
           <Experience />
           <div className="section-grid"><Projects /></div>
+          <div className="section-dots"><CaseStudies /></div>
           <div className="section-dots"><Achievements /></div>
           <Contact />
         </main>
