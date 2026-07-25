@@ -76,7 +76,7 @@ export function Contact() {
 
           <Reveal delay={0.15}>
             <form
-              action="https://formsubmit.co/f5cd973dba1ae71e2dfaebfa0a7fa412"
+              action="https://formsubmit.co/mzohaib01.inbox@gmail.com"
               method="POST"
               onSubmit={onSubmit}
               className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 sm:p-8"
